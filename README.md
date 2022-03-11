@@ -3,7 +3,7 @@
 ## USAGE
 
 ```
-$ git git clone https://gitlab.com/cursoseaulas/mrExamples.git
+$ git clone https://gitlab.com/cursoseaulas/mrExamples.git
 $ cd mrExamples && mkdir build && cd build
 $ cmake .. && make
 $ ./<EXAMPLE_BIN>
