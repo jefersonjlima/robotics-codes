@@ -1,5 +1,13 @@
 # Mobile Robot - Cpp Examples
 
+## USAGE
+
+```
+$ git git clone https://gitlab.com/cursoseaulas/mrExamples.git
+$ cd mrExamples && mkdir build && cd build
+$ cmake .. && make
+$ ./<EXAMPLE_BIN>
+```
 
 ## Sumary
 
