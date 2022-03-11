@@ -21,8 +21,8 @@ void rot2dVec(const Eigen::Matrix<float, 2, 1>& v, Eigen::Matrix<float, 2, 1>& r
   rotation << std::cos(theta), -std::sin(theta),
               std::sin(theta), std::cos(theta);
 
-  std::cout << "v value: \n" << v << std::endl;
-  std::cout << "rotation value: \n" << rotation << std::endl;
+  std::cout << "v values: \n" << v << std::endl;
+  std::cout << "matrix rotation values: \n" << rotation << std::endl;
 
   r = rotation * v;
 
@@ -42,8 +42,7 @@ int main(int argc, char* argv[])
 
   rot2dVec(v, r, theta);
 
-  std::cout << "v(0): " << r[0] << std::endl;
-  std::cout << "v(1): " << r[1] << std::endl;
+  std::cout << "r values: \n" << r << std::endl;
 
   return 0;
 }
