@@ -6,12 +6,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # External Libraries
 find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIRS})
+find_package(PythonLibs REQUIRED )
+include_directories(${PYTHON_INCLUDE_DIRS})
 
 # Internal Libraries
 include_directories("include")
 
-add_executable(rotation_ex src/examples/rotation_ex.cpp
-  				${EINGEN3_LIBRARIES}
-				)
+if(EXAMPLE EQUAL 1 OR COMPILE_ALL)
+  add_subdirectory(src/examples/1)
+endif()
+
+
+if(COMPILE_TESTS OR COMPILE_ALL)
+  add_subdirectory(tests)
+endif() 
 
