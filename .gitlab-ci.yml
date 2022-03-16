@@ -11,10 +11,9 @@ build:
     - git clone https://github.com/lava/matplotlib-cpp.git /tmp/matplotlibcpp
     - cd /tmp/matplotlibcpp/ && make build && cd build
     - cmake .. && sudo make install
-
   script:
     - cd ~/ https://gitlab.com/cursoseaulas/robotics-codes.git
     - cd robotics-codes && make build
   only:
-    - master
+    - main
 
