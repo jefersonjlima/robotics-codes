@@ -1,5 +1,7 @@
 # Robotics Codes
 
+Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
+
 ## Sumary
 
 1. **Robot Kinematics and Dynamics Modeling**
@@ -32,6 +34,16 @@
 	1. Introduction to EVM and Solidity
 	1. How to deploy a Robot Smart Contract
 1. **Mobile Robotics Lecture Notes**
+
+## Prepare Environment
+
+```bash
+$ sudo apt-get update 
+$ sudo apt install git cmake build-essential libeigen3-dev libboost-all-dev -y
+$ git clone https://github.com/lava/matplotlib-cpp.git /tmp/matplotlibcpp
+$ cd /tmp/matplotlibcpp/ && make build && cd build
+$ cmake .. && sudo make install
+```
 
 
 ## Usage
