@@ -14,7 +14,7 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
  #include <matplotlibcpp.h>
  namespace plt = matplotlibcpp;
 #endif 
@@ -26,13 +26,12 @@ const double vL = 0.06; // left  wheel
 const double L  = 0.1;  // distance between wheels 
 typedef boost::array< double , 3 > state;
 
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
 std::vector<double> xPos{0}, yPos{0}, theta{0};
 #endif
 
 void car_model(const state& x, state& dxdt, double t)
 {
-
   double v = (vR + vL)/2;
   double w = (vR - vL)/L;
 
@@ -43,7 +42,7 @@ void car_model(const state& x, state& dxdt, double t)
 
 void log_model(const state& x, const double t)
 {
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
   xPos.push_back(x[0]);
   yPos.push_back(x[1]);
 #endif
@@ -54,14 +53,14 @@ int main(int argc, char** argv)
 {
     state x = { 0.0 , 0.0 , 0.0 }; // initial conditions
 
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
     plt::figure();
     plt::named_plot("Initial Position", xPos, yPos, "o");
 #endif
     runge_kutta4< state > stepper;
     integrate_const(stepper, car_model, x, 0.0, 20.0, 0.1, log_model);
 
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
     plt::named_plot("Car position", xPos, yPos);
     plt::legend();
     plt::show();

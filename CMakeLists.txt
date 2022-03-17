@@ -14,6 +14,7 @@ find_package(Eigen3 REQUIRED)
 if(WITH_PLOT_GRAPH)
  find_package(PythonLibs REQUIRED)
  include_directories(${PYTHON_INCLUDE_DIRS})
+ add_definitions(-DUSE_MATPLOTLIB)
 endif()
 
 # Internal Libraries

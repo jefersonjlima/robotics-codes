@@ -14,7 +14,7 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
  #include <matplotlibcpp.h>
  namespace plt = matplotlibcpp;
 #endif 
@@ -30,7 +30,7 @@ const double L = 0.5; 	// (L)     electric inductance                0.5 H
 const double V = 12; 	// (V)     motor votage                       12 V
 
 typedef boost::array< double , 2 > state;
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
  std::vector<double> ts, dTheta, di;
 #endif
 
@@ -42,7 +42,7 @@ void dc_motor_model(const state& x, state& dxdt, double t)
 
 void log_model(const state& x, const double t)
 {
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB 
   ts.push_back(t);
   dTheta.push_back(x[0]);
   di.push_back(x[1]);
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
     runge_kutta4< state > stepper;
     integrate_const( stepper , dc_motor_model, x , 0.0 , 20.0 , 0.1, log_model );
 
-#ifdef WITH_PLOT_GRAPH
+#ifdef USE_MATPLOTLIB
     plt::figure();
     plt::named_plot("Velocity (rad/s)", ts, dTheta);
     plt::named_plot("Current (A)", ts, di);
