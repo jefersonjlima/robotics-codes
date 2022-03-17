@@ -27,12 +27,11 @@ void hTrans3dVec(const Eigen::Matrix<float, 4, 1>& v,
 	      0.0,              0.0,             0.0, 1.0;
     
   std::cout << "v values:\n" << v << std::endl;
-  std::cout << "translation values:\n" << htMatrix << std::endl;
+  std::cout << "homogeneous transformation values:\n" << htMatrix << std::endl;
 
   r = htMatrix * v;
 
 }
-
 
 int main(int argc, char* argv[])
 {

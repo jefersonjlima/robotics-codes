@@ -26,7 +26,7 @@ void rot2dVec(const Eigen::Matrix<float, 4, 1>& v,
 	      0.0,             0.0,              0.0, 1.0;
 
   std::cout << "v values: \n" << v << std::endl;
-  std::cout << "matrix rotation values: \n" << rotation << std::endl;
+  std::cout << "rotation values: \n" << rotation << std::endl;
 
   r = rotation * v;
 
