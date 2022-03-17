@@ -14,10 +14,12 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
-#include <matplotlibcpp.h>
+#ifdef WITH_PLOT_GRAPH
+ #include <matplotlibcpp.h>
+ namespace plt = matplotlibcpp;
+#endif 
 
 using namespace boost::numeric::odeint;
-namespace plt = matplotlibcpp;
 
 const double j = 0.01; 	// (J)     moment of inertia of the rotor     0.01 kg.m^2
 const double b = 0.1;	// (b)     motor viscous friction constant    0.1 N.m.s
@@ -28,7 +30,9 @@ const double L = 0.5; 	// (L)     electric inductance                0.5 H
 const double V = 12; 	// (V)     motor votage                       12 V
 
 typedef boost::array< double , 2 > state;
-std::vector<double> ts, dTheta, di;
+#ifdef WITH_PLOT_GRAPH
+ std::vector<double> ts, dTheta, di;
+#endif
 
 void dc_motor_model(const state& x, state& dxdt, double t)
 {
@@ -38,25 +42,26 @@ void dc_motor_model(const state& x, state& dxdt, double t)
 
 void log_model(const state& x, const double t)
 {
+#ifdef WITH_PLOT_GRAPH
   ts.push_back(t);
   dTheta.push_back(x[0]);
   di.push_back(x[1]);
+#endif
   std::cout << t << '\t' << x[0] << '\t' << x[1]  << std::endl;
 }
 
 int main(int argc, char** argv)
 {
     state x = { 0.0 , 0.0 }; // initial conditions
-
-
     runge_kutta4< state > stepper;
     integrate_const( stepper , dc_motor_model, x , 0.0 , 20.0 , 0.1, log_model );
 
+#ifdef WITH_PLOT_GRAPH
     plt::figure();
     plt::named_plot("Velocity (rad/s)", ts, dTheta);
     plt::named_plot("Current (A)", ts, di);
     plt::legend();
     plt::show();
-
+#endif
   return 0;
 }
