@@ -40,19 +40,26 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 ```bash
 $ sudo apt-get update 
 $ sudo apt install git cmake build-essential libeigen3-dev libboost-all-dev -y
+$ pip install matplotlib
 $ git clone https://github.com/lava/matplotlib-cpp.git /tmp/matplotlibcpp
 $ cd /tmp/matplotlibcpp/ && make build && cd build
 $ cmake .. && sudo make install
 ```
+If you are using WSL-Ubuntu
 
+```bash
+sudo ln -s /home/jeferson/.local/lib/python3.8/site-packages/numpy/core/include/numpy /usr/include/numpy
+sudo apt-get install python3-gi-cairo
+sudo apt-get install python3-tk
+```
 
 ## Usage
 
 ```bash
 $ git clone https://gitlab.com/cursoseaulas/robotics-codes.git
-$ cd robotics-codes && mkdir build && cd build
-$ cmake -DEXAMPLE=i<CHAPTER_NUMBER> .. && make -j${nproc}
-$ ./<EXAMPLE_BIN>
+$ cd robotics-codes && make build
+# next you can try to run the example
+$ ./build/bin/<EXAMPLE>_ex
 ```
 
 ## References

@@ -3,9 +3,8 @@
 ## USAGE
 
 ```bash
-$ git clone https://gitlab.com/cursoseaulas/mrExamples.git
-$ cd mrExamples && mkdir build && cd build
-$ cmake -DEXAMPLE=1 .. && make -j${nproc}
-$ ./<EXAMPLE_BIN>
+$ git clone https://gitlab.com/cursoseaulas/robotics-codes.git
+$ cd robotics-codes && make build
+# next you can try to run the example
+$ ./build/bin/<EXAMPLE>_ex
 ```
-
