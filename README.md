@@ -8,7 +8,7 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 	1. [Rotation Matrix](src/examples/1/rotation_ex.cpp)
 	1. [Translation Matrix](src/examples/1/translation_ex.cpp)
 	1. [Homogeneous Transformation Matrix](src/examples/1/hTransformation_ex.cpp)
-	1. [Differential Drive Kinematics Model](src/examples/1/diff-drive-Kinematics_ex.cpp)
+	1. [Differential Drive Kinematics Model](src/examples/1/diff_drive_Kinematics_ex.cpp)
 	1. Dynamics Modeling
 1. **Locomotion and Perception**
 	1. Perception e Sensors in Modern Robots
