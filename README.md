@@ -9,7 +9,7 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 	1. [Translation Matrix](src/examples/1/translation_ex.cpp)
 	1. [Homogeneous Transformation Matrix](src/examples/1/hTransformation_ex.cpp)
 	1. [Differential Drive Kinematics Model](src/examples/1/diff_drive_Kinematics_ex.cpp)
-	1. Dynamics Modeling
+	1. [Dynamics Modeling](src/examples/1/dc_motor_ex.cpp)
 1. **Locomotion and Perception**
 	1. Perception e Sensors in Modern Robots
 	1. Bayes Filter Review
@@ -22,12 +22,12 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 	1. Classic Control - PID Review
 	1. Modern Control - LQR and MCP Control
 1. **Simultaneous localization and mapping (SLAM)**
+	1. Iteratively Reweighted Least Squares
 	1. The Iterative Closest Point (ICP) Algorithm
 	1. k-nearest neighbors algorithm
-	1. Iteratively Reweighted Least Squares
 	1. Random Sample Consensus
 	1. Adaptive Monte Carlo localization (AMCL)
-	1. Visual Odometry:
+	1. Visual Odometry
 1. **Robot as a Service (RaaS)**
 	1. An Intro to Blockchain
 	1. Smart Contracts and Robotics
@@ -48,9 +48,8 @@ $ cmake .. && sudo make install
 If you are using WSL-Ubuntu
 
 ```bash
-sudo ln -s /home/jeferson/.local/lib/python3.8/site-packages/numpy/core/include/numpy /usr/include/numpy
-sudo apt-get install python3-gi-cairo
-sudo apt-get install python3-tk
+sudo ln -s /home/${USER}/.local/lib/python3.8/site-packages/numpy/core/include/numpy /usr/include/numpy
+sudo apt-get install python3-gi-cairo python3-tk
 ```
 
 ## Usage
@@ -70,4 +69,4 @@ $ ./build/bin/<EXAMPLE>_ex
 
 ## Bugs & Feature Requests
 
-Please report bugs and request features using the issues
+Please report bugs and request features using the [issues](https://gitlab.com/cursoseaulas/robotics-codes/-/issues)
