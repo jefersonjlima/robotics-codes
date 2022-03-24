@@ -40,16 +40,17 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 ```bash
 $ sudo apt-get update 
 $ sudo apt install git cmake build-essential libeigen3-dev libboost-all-dev -y
+$ sudo apt install python3-pip
 $ pip install matplotlib
 $ git clone https://github.com/lava/matplotlib-cpp.git /tmp/matplotlibcpp
-$ cd /tmp/matplotlibcpp/ && make build && cd build
+$ cd /tmp/matplotlibcpp/ && mkdir build && cd build
 $ cmake .. && sudo make install
 ```
 If you are using WSL-Ubuntu
 
 ```bash
-sudo ln -s /home/${USER}/.local/lib/python3.8/site-packages/numpy/core/include/numpy /usr/include/numpy
-sudo apt-get install python3-gi-cairo python3-tk
+$ sudo ln -s /home/${USER}/.local/lib/python3.8/site-packages/numpy/core/include/numpy /usr/include/numpy
+$ sudo apt-get install python3-gi-cairo python3-tk
 ```
 
 ## Usage
