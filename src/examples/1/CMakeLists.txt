@@ -13,8 +13,12 @@ target_link_libraries(hTransformation_ex Eigen3::Eigen)
 
 # Differential Drive Kinematics
 add_executable(diff_drive_Kinematics_ex diff_drive_Kinematics_ex.cpp)
-target_link_libraries(diff_drive_Kinematics_ex ${PYTHON_LIBRARIES})
+if(WITH_PLOT_GRAPH)
+ target_link_libraries(diff_drive_Kinematics_ex ${PYTHON_LIBRARIES})
+endif()
 
 # DC Motor Simulation
 add_executable(dc_motor_ex dc_motor_ex.cpp)
-target_link_libraries(dc_motor_ex ${PYTHON_LIBRARIES})
+if(WITH_PLOT_GRAPH)
+ target_link_libraries(dc_motor_ex ${PYTHON_LIBRARIES})
+endif()
