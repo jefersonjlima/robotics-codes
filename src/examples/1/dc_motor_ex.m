@@ -21,11 +21,13 @@ end
 
 function dx = dc_motor_model(t,x)  
   % parameters
-  J = 0.01;
-  b = 0.1;
-  K = 0.01;
-  R = 1;
-  L = 0.5;
+  J = 0.01; 	% (J)     moment of inertia of the rotor     0.01 kg.m^2
+  b = 0.1;	% (b)     motor viscous friction constant    0.1 N.m.s 
+  K = 0.01; 	% (Kt)    motor torque constant              0.01 N.m/Amp
+  		% (Ke)    electromotive force constant       0.01 V/rad/sec
+  R = 1;	% (R)     electric resistance                1 Ohm
+  L = 0.5;	% (L)     electric inductance                0.5 H
+  V = 12;   	% (V)     motor votage                       12 V
   % state space model
   A = [-b/J   K/J
     -K/L   -R/L];
@@ -33,7 +35,7 @@ function dx = dc_motor_model(t,x)
     1/L];
   C = [1   0];
   % input voltage
-  u = 12;
+  u = V;
   % system equation
   dx = zeros(2,1);
   dx = A*x+B*u;

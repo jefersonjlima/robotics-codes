@@ -15,5 +15,5 @@ build:
     - cd ~/ https://gitlab.com/cursoseaulas/robotics-codes.git
     - cd robotics-codes && make build
   only:
-    - main
+    - dev/ci
 
