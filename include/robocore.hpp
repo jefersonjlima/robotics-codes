@@ -14,22 +14,26 @@
 #ifndef ROBOCORE_HPP
 #define ROBOCORE_HPP
 
-#ifndef PLOT_OFF
-#include <matplotlibcpp.h>
+#ifdef SAVE_OUTPUT_CSV
+ #include <string>
+ #include <fstream>
+ #include <vector>
+ #include <utility>
+
+ typedef std::vector<std::pair<std::string,
+ 			std::vector<double>>> columns;
 #endif
-
-#include <iostream>
-
 
 class RoboCore{
   private:
 
-
   public:
-
     RoboCore();
+    ~RoboCore(){};
 
-    static void plotGraph(const Eigen::Matrix<float, 4, 1>& vec);
+#ifdef SAVE_OUTPUT_CSV
+    static void write_csv(std::string filename, columns dataset);
+#endif
 
 };
 

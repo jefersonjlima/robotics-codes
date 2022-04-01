@@ -8,13 +8,19 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 option(WITH_PLOT_GRAPH "Option to use the Matplotlib" ON)
+option(WITH_SAVE_OUTPUT_CSV "Option to save output as CSV" ON)
 
 # External Libraries
 find_package(Eigen3 REQUIRED)
 if(WITH_PLOT_GRAPH)
+  message(STATUS "Enable MATPLOTLIBCPP library")
  find_package(PythonLibs REQUIRED)
  include_directories(${PYTHON_INCLUDE_DIRS})
  add_definitions(-DUSE_MATPLOTLIB)
+endif()
+
+if(WITH_SAVE_OUTPUT_CSV)
+  add_definitions(-DSAVE_OUTPUT_CSV)
 endif()
 
 # Internal Libraries

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
+#include <robocore.hpp>
 #ifdef USE_MATPLOTLIB
  #include <matplotlibcpp.h>
  namespace plt = matplotlibcpp;
@@ -26,9 +27,7 @@ const double vL = 0.06; // left  wheel
 const double L  = 0.1;  // distance between wheels 
 typedef boost::array< double , 3 > state;
 
-#ifdef USE_MATPLOTLIB
-std::vector<double> xPos{0}, yPos{0}, theta{0};
-#endif
+std::vector<double> xPos{0.0}, yPos{0.0}, theta{0.0};
 
 void car_model(const state& x, state& dxdt, double t)
 {
@@ -42,10 +41,9 @@ void car_model(const state& x, state& dxdt, double t)
 
 void log_model(const state& x, const double t)
 {
-#ifdef USE_MATPLOTLIB
   xPos.push_back(x[0]);
   yPos.push_back(x[1]);
-#endif
+  theta.push_back(x[2]);
   std::cout << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << std::endl;
 }
 
@@ -64,6 +62,12 @@ int main(int argc, char** argv)
     plt::named_plot("Car position", xPos, yPos);
     plt::legend();
     plt::show();
+#endif
+
+#ifdef SAVE_OUTPUT_CSV
+  columns vals = {{"theta", theta}, {"xpos", xPos}, {"ypos", yPos}};
+  RoboCore::write_csv("/tmp/diff_kinematic_output.csv", vals);
+  std::cout << "Output file was saved in /tmp" << std::endl;
 #endif
 
   return 0;

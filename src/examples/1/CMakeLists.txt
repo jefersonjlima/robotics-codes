@@ -12,13 +12,13 @@ add_executable(hTransformation_ex hTransformation_ex.cpp)
 target_link_libraries(hTransformation_ex Eigen3::Eigen) 
 
 # Differential Drive Kinematics
-add_executable(diff_drive_Kinematics_ex diff_drive_Kinematics_ex.cpp)
+add_executable(diff_drive_kinematics_ex ../../robocore.cpp diff_drive_kinematics_ex.cpp)
 if(WITH_PLOT_GRAPH)
- target_link_libraries(diff_drive_Kinematics_ex ${PYTHON_LIBRARIES})
+ target_link_libraries(diff_drive_kinematics_ex ${PYTHON_LIBRARIES})
 endif()
 
 # DC Motor Simulation
-add_executable(dc_motor_ex dc_motor_ex.cpp)
+add_executable(dc_motor_ex ../../robocore.cpp dc_motor_ex.cpp)
 if(WITH_PLOT_GRAPH)
  target_link_libraries(dc_motor_ex ${PYTHON_LIBRARIES})
 endif()
