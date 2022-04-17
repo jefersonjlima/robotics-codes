@@ -17,7 +17,7 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 	1. The Extended Kalman Filter
 	1. Understanding Quaternions
 1. **Robotic Simulation**
-	1. Introduction to ROS - Robotics Operating System
+	1. [Introduction to ROS - Robotics Operating System](src/examples/3/README.md)
 1. **Robot Control**
 	1. Classic Control - PID Review
 	1. Modern Control - LQR and MCP Control
