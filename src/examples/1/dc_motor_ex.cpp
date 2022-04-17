@@ -22,15 +22,15 @@
 
  using namespace boost::numeric::odeint;
 
- const double j = 0.01; 	// (J)     moment of inertia of the rotor     0.01 kg.m^2
- const double b = 0.1;	// (b)     motor viscous friction constant    0.1 N.m.s
- const double Ke = 0.01; // (Ke)    electromotive force constant       0.01 V/rad/sec
- const double Kt = 0.01; // (Kt)    motor torque constant              0.01 N.m/Amp
- const double R = 1;	// (R)     electric resistance                1 Ohm
- const double L = 0.5; 	// (L)     electric inductance                0.5 H
- const double V = 12; 	// (V)     motor votage                       12 V
+ const double j = 0.01;		// (J)     moment of inertia of the rotor     0.01 kg.m^2
+ const double b = 0.1;		// (b)     motor viscous friction constant    0.1 N.m.s
+ const double Ke = 0.01;	// (Ke)    electromotive force constant       0.01 V/rad/sec
+ const double Kt = 0.01;	// (Kt)    motor torque constant              0.01 N.m/Amp
+ const double R = 1;		// (R)     electric resistance                1 Ohm
+ const double L = 0.5;		// (L)     electric inductance                0.5 H
+ const double V = 12; 		// (V)     motor votage                       12 V
 
- typedef boost::array< double , 2 > state;
+ typedef boost::array< double , 2> state;
  std::vector<double> ts, dTheta, di;
 
 void dc_motor_model(const state& x, state& dxdt, double t)
