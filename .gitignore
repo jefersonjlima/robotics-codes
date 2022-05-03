@@ -6,3 +6,5 @@
 # ros output
 src/examples/3/example_ws/build/
 src/examples/3/example_ws/devel/
+src/examples/3/example_ws/logs/
+src/examples/3/example_ws/.catkin_workspace
