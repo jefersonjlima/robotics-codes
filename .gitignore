@@ -8,3 +8,10 @@ devel/
 logs/
 .catkin_workspace
 .catkin_tools/
+
+# turtlebot3
+turtlebot3/
+turtlebot3_msgs/
+turtlebot3_simulations/
+
+
