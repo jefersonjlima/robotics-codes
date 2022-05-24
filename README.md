@@ -1,6 +1,6 @@
 # Robotics Codes
 
-Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
+Principal repository https://gitlab.com/cursoseaulas/robotics-book/-/wikis/home
 
 ## Sumary
 
@@ -13,11 +13,15 @@ Principal repository https://gitlab.com/cursoseaulas/robotica-movel/-/wikis/home
 1. **Locomotion and Perception**
 	1. Perception e Sensors in Modern Robots
 	1. Bayes Filter Review
-	1. The Kalman Filter
-	1. The Extended Kalman Filter
+	1. [The Kalman Filter](https://gitlab.com/jeferson.lima/kalman-filter)
+	1. [The Extended Kalman Filter](https://gitlab.com/jeferson.lima/kalman-filter)
 	1. Understanding Quaternions
 1. **Robotic Simulation**
 	1. [Introduction to ROS - Robotics Operating System](src/examples/3/README.md)
+	1. [ROS - Temperature Topic](src/examples/3/example_ws/src/temperature_sensor)
+	1. [ROS - LIDAR Topic](src/examples/3/example_ws/src/lidar_sensor)
+	1. [ROS - Follow Me Challenge](src/examples/3/challenge1_ws/src/follow_me)
+	1. [ROS - Follow Me with LIDAR Sensor](src/examples/3/challenge2_ws/src/follow_me_plusplus)
 1. **Robot Control**
 	1. Classic Control - PID Review
 	1. Modern Control - LQR and MCP Control
