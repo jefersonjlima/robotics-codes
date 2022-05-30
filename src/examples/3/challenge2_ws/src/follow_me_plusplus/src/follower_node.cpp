@@ -48,11 +48,11 @@ class Follow
       // replace inf to LIDAR_MAX_RANGE
       std::transform(
 	  msg->ranges.begin(), msg->ranges.end(), sensor.begin(),
-	  [](float it) { return (it > LIDAR_SAMPLES)? LIDAR_MAX_RANGE : it; });
+	  [](float it) { return (it > LIDAR_MAX_RANGE)? LIDAR_MAX_RANGE : it; });
 
       for (size_t i = 0; i < LIDAR_SAMPLES; i++)
       {
-	lidar_diff_[i] = sensor[i] - buffer_lidar_[i];
+	lidar_diff_[i] = pow(sensor[i] - buffer_lidar_[i], 2);
       }
       //copy sensor to buffer
       std::copy(sensor.begin(), sensor.end(), buffer_lidar_.begin());
@@ -77,8 +77,6 @@ class Follow
 
 #ifdef USE_MATPLOT
       std::vector<double> theta = linspace(0, 2 * pi, LIDAR_SAMPLES);
-//      polarplot(theta, lidar_diff_);
-//      gca()->r_axis().limits({0, LIDAR_MAX_RANGE + 0.1});
 	plot(theta, lidar_diff_);
 	ylim({-LIDAR_MAX_RANGE - 0.1, LIDAR_MAX_RANGE + 0.1});
 	xlim({0 , 2 * pi});
@@ -152,13 +150,13 @@ int main (int argc, char** argv)
   ros::init(argc, argv, "tb3_follow_node");
   ros::NodeHandle nh;
   Follow follower(nh);
-  ros::Rate loop_rate(1);
+  ros::Rate loop_rate(0.5);
 
   while(ros::ok())
   {
     ros::spinOnce();
 //    follower.moveToTarget();
-    loop_rate.sleep();
+//    loop_rate.sleep();
   }
   return 0;
 }
