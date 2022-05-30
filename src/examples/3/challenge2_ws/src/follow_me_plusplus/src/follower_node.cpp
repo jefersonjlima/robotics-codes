@@ -10,7 +10,11 @@
  using namespace matplot;
 #endif
 
-#define SHOW_LOGS
+// #define SHOW_POSITION_LOGS
+#define SHOW_SENSOR_LOGS
+// Turtlebot3 Burger Parameters
+#define LIDAR_SAMPLES		360 
+#define LIDAR_MAX_RANGE		3.5 
 
 class Follow
 {
@@ -23,11 +27,16 @@ class Follow
     geometry_msgs::Pose2D followerPose_;
   // control
     ros::Publisher followerControl_;
+  //lidar
+    std::vector<float> buffer_lidar_;
+    std::vector<float> lidar_diff_;
+    bool is_init_lidar = true;
 
   public:
-    Follow(ros::NodeHandle nh)
+    Follow(ros::NodeHandle nh) : 
+      buffer_lidar_(LIDAR_SAMPLES, 0), lidar_diff_(LIDAR_SAMPLES, 0) 
     {
-      masterGetPose_   = nh.subscribe("tb3_0/odom", 100, &Follow::getMasterPose,   this);
+      masterGetPose_   = nh.subscribe("tb3_1/scan", 100, &Follow::getMasterPose,   this);
       followerGetPose_ = nh.subscribe("tb3_1/odom", 100, &Follow::getFollowerPose, this);
       followerControl_ = nh.advertise<geometry_msgs::Twist>("tb3_1/cmd_vel", 100);
     }
@@ -36,32 +45,46 @@ class Follow
     {
       auto sensor = std::vector<float>(msg->ranges.size());
 
-      // replace inf to 3.5
+      // replace inf to LIDAR_MAX_RANGE
       std::transform(
 	  msg->ranges.begin(), msg->ranges.end(), sensor.begin(),
-	  [](float it) { return (it > 360)? 3.5 : it; });
+	  [](float it) { return (it > LIDAR_SAMPLES)? LIDAR_MAX_RANGE : it; });
 
-#ifdef SHOW_LOGS
-      ROS_INFO("Sensor Data:");
-      for(auto it = std::begin(sensor); it != std::end(sensor); ++it)
+      for (size_t i = 0; i < LIDAR_SAMPLES; i++)
       {
-	std::cout << *it << ", ";
+	lidar_diff_[i] = sensor[i] - buffer_lidar_[i];
       }
+      //copy sensor to buffer
+      std::copy(sensor.begin(), sensor.end(), buffer_lidar_.begin());
+
+#ifdef SHOW_SENSOR_LOGS
+      ROS_INFO("lidar_diff_ Data:");
+      for(auto it = std::begin(lidar_diff_); it != std::end(lidar_diff_); ++it)
+	std::cout << *it << ", ";
       std::cout << std::endl;
 #endif
-
+      //
+      //
+      //
       //
       // your code here
+      //
+      //
+      //
       //
       masterPose_.x = 0;
       masterPose_.y = 0;
 
 #ifdef USE_MATPLOT
-      std::vector<double> theta = linspace(0, 2 * pi, 360);
-      polarplot(theta, sensor);
+      std::vector<double> theta = linspace(0, 2 * pi, LIDAR_SAMPLES);
+//      polarplot(theta, lidar_diff_);
+//      gca()->r_axis().limits({0, LIDAR_MAX_RANGE + 0.1});
+	plot(theta, lidar_diff_);
+	ylim({-LIDAR_MAX_RANGE - 0.1, LIDAR_MAX_RANGE + 0.1});
+	xlim({0 , 2 * pi});
 #endif
 
-#ifdef SHOW_LOGS
+#ifdef SHOW_POSITION_LOGS 
       ROS_INFO("[Master] x:%.2lf, y: %.2lf, theta: %.2lf", masterPose_.x, masterPose_.y, masterPose_.theta);
 #endif
     }
@@ -79,7 +102,7 @@ class Follow
       double roll, pitch, yaw;
       m.getRPY(roll, pitch, yaw);
       followerPose_.theta = yaw;
-#ifdef SHOW_LOGS
+#ifdef SHOW_POSITION_LOGS
       ROS_INFO("[Follower] x:%.2lf, y: %.2lf, theta: %.2lf", followerPose_.x, followerPose_.y, followerPose_.theta);
 #endif
     }
@@ -118,7 +141,9 @@ class Follow
 
       // ---------------------------------------------------------------------------
       followerControl_.publish(command);
+#ifdef SHOW_POSITION_LOGS
       ROS_INFO("[Follower] Linear Control %.2f, Angular Control: %.2f", v_t, omega);
+#endif
     }
 };
 
@@ -132,7 +157,7 @@ int main (int argc, char** argv)
   while(ros::ok())
   {
     ros::spinOnce();
-    follower.moveToTarget();
+//    follower.moveToTarget();
     loop_rate.sleep();
   }
   return 0;
