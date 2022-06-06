@@ -10,8 +10,8 @@
  using namespace matplot;
 #endif
 
-// #define SHOW_POSITION_LOGS
-#define SHOW_SENSOR_LOGS
+#define SHOW_POSITION_LOGS
+// #define SHOW_SENSOR_LOGS
 // Turtlebot3 Burger Parameters
 #define LIDAR_SAMPLES		360 
 #define LIDAR_MAX_RANGE		3.5 
@@ -30,7 +30,8 @@ class Follow
   //lidar
     std::vector<float> buffer_lidar_;
     std::vector<float> lidar_diff_;
-    bool is_init_lidar = true;
+    bool is_in_motion = false;
+    bool save_sensor_buffer = true;
 
   public:
     Follow(ros::NodeHandle nh) : 
@@ -52,10 +53,17 @@ class Follow
 
       for (size_t i = 0; i < LIDAR_SAMPLES; i++)
       {
-	lidar_diff_[i] = pow(sensor[i] - buffer_lidar_[i], 2);
+	lidar_diff_[i] = sensor[i] - buffer_lidar_[i];
       }
       //copy sensor to buffer
-      std::copy(sensor.begin(), sensor.end(), buffer_lidar_.begin());
+      if (!is_in_motion && save_sensor_buffer)
+      {
+      	std::copy(sensor.begin(), sensor.end(), buffer_lidar_.begin());
+	save_sensor_buffer = false;
+#ifdef SHOW_POSITION_LOGS
+      ROS_INFO("[Follower] Save lidar buffer data!");
+#endif
+      }
 
 #ifdef SHOW_SENSOR_LOGS
       ROS_INFO("lidar_diff_ Data:");
@@ -100,6 +108,19 @@ class Follow
       double roll, pitch, yaw;
       m.getRPY(roll, pitch, yaw);
       followerPose_.theta = yaw;
+
+      if (abs(msg->twist.twist.linear.x) > 0.01 && abs(msg->twist.twist.angular.z) > 0.01)
+      {
+	is_in_motion = true;
+#ifdef SHOW_POSITION_LOGS
+      	ROS_INFO("[Follower] In Motion!");
+#endif
+      }
+      else if (is_in_motion && !save_sensor_buffer)
+      {
+	is_in_motion = false;
+	save_sensor_buffer = true;
+      }
 #ifdef SHOW_POSITION_LOGS
       ROS_INFO("[Follower] x:%.2lf, y: %.2lf, theta: %.2lf", followerPose_.x, followerPose_.y, followerPose_.theta);
 #endif
