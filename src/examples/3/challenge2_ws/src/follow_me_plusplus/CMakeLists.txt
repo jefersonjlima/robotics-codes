@@ -4,7 +4,7 @@ project(follow_me_plusplus)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-option(WITH_PLOT_GRAPH "Option to use the Matplot++" OFF)
+option(WITH_PLOT_GRAPH "Option to use the Matplot++" ON)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -131,7 +131,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/follow_me.cpp
+#   src/${PROJECT_NAME}/follow_me_plusplus.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -213,7 +213,7 @@ endif()
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_follow_me.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_follow_me_plusplus.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
