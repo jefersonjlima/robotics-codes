@@ -11,6 +11,10 @@ target_link_libraries(translation_ex Eigen3::Eigen)
 add_executable(hTransformation_ex hTransformation_ex.cpp)
 target_link_libraries(hTransformation_ex Eigen3::Eigen) 
 
+# Forward Kinematic 2-Link arm
+add_executable(forward_kinematics_two_link_arm_ex forward_kinematics_two_link_arm_ex.cpp)
+target_link_libraries(forward_kinematics_two_link_arm_ex Eigen3::Eigen) 
+
 # Differential Drive Kinematics
 add_executable(diff_drive_kinematics_ex ../../robocore.cpp diff_drive_kinematics_ex.cpp)
 if(WITH_PLOT_GRAPH)

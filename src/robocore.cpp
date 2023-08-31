@@ -13,11 +13,9 @@
 
 #include <robocore.hpp>
 
-
 RoboCore::RoboCore()
 {
 }
-
 
 #ifdef SAVE_OUTPUT_CSV
 void RoboCore::write_csv(std::string filename, columns dataset)
