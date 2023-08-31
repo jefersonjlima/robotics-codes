@@ -8,6 +8,7 @@ Principal repository https://gitlab.com/cursoseaulas/robotics-book/-/wikis/home
 	1. [Rotation Matrix](src/examples/1/rotation_ex.cpp)
 	1. [Translation Matrix](src/examples/1/translation_ex.cpp)
 	1. [Homogeneous Transformation Matrix](src/examples/1/hTransformation_ex.cpp)
+	1. [Forward Kinematics - Two Link Arm](src/examples/1/forward_kinematics_two_link_arm_ex.cpp)
 	1. [Differential Drive Kinematics Model](src/examples/1/diff_drive_Kinematics_ex.cpp)
 	1. [Dynamics Modeling](src/examples/1/dc_motor_ex.cpp)
 1. **Locomotion and Perception**
